@@ -14,6 +14,15 @@ namespace Heist
             Console.WriteLine();
 
             int bankDifficulty = 100;
+            bool passedBankDifficulty = false;
+
+            // Prompt user to enter bankDifficulty
+            while (!passedBankDifficulty)
+            {
+                Console.Write("What difficulty do you want the bank(s) to be (#)?: ");
+                passedBankDifficulty = int.TryParse(Console.ReadLine(), out bankDifficulty);
+            }
+            Console.WriteLine();
 
             while (name != "")
             {
@@ -67,6 +76,10 @@ namespace Heist
                 totalSkill += member.Skill;
             }
 
+            // Initialize values that will hold successful and failed attempts
+            int successfulRuns = 0;
+            int failedRuns = 0;
+
             // Initialize Attempts
             int maxAttempts = 0;
             int attempts = 0;
@@ -99,14 +112,18 @@ namespace Heist
                 if (totalSkill >= totalDifficulty)
                 {
                     Console.WriteLine("The heist was successful!");
+                    successfulRuns++;
                 }
                 else
                 {
                     Console.WriteLine("The heist failed.");
+                    failedRuns++;
                 }
                 Console.WriteLine();
                 attempts++;
             }
+            Console.WriteLine($"Successful Runs: {successfulRuns}");
+            Console.WriteLine($"Failed Runs: {failedRuns}");
         }
     }
 }
