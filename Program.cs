@@ -70,6 +70,8 @@ namespace Heist
             Random rnd = new Random();
             int luck = rnd.Next(-10, 11);
 
+            bankDifficulty += luck;
+
             Console.WriteLine($"Team Skill Level: {totalSkill}");
             Console.WriteLine($"Bank Difficulty Level: {bankDifficulty}");
             Console.WriteLine();
