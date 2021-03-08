@@ -4,9 +4,9 @@ namespace Heist
     {
         public string Name { get; set; }
         public int Skill { get; set; }
-        public int Courage { get; set; }
+        public decimal Courage { get; set; }
 
-        public Member(string name, int skill, int courage)
+        public Member(string name, int skill, decimal courage)
         {
             Name = name;
             Skill = skill;
