@@ -21,7 +21,7 @@ namespace Heist
                 bool passedSkill = false;
                 int skill = 0;
                 bool passedCourage = false;
-                int courage = 0;
+                decimal courage = 0.0m;
 
                 // New Member
                 Console.Write("Enter a team member's name: ");
@@ -43,8 +43,12 @@ namespace Heist
                 // Member's Courage
                 while (!passedCourage)
                 {
-                    Console.Write($"Enter {name}'s courage factor (number): ");
-                    passedCourage = int.TryParse(Console.ReadLine(), out courage);
+                    Console.Write($"Enter {name}'s courage factor (0.0-2.0): ");
+                    passedCourage = decimal.TryParse(Console.ReadLine(), out courage);
+                    if (courage < 0m || courage > 2m)
+                    {
+                        passedCourage = false;
+                    }
                 }
                 Console.WriteLine();
 
@@ -62,6 +66,13 @@ namespace Heist
             {
                 totalSkill += member.Skill;
             }
+            // Prepare random number for "luck"
+            Random rnd = new Random();
+            int luck = rnd.Next(-10, 11);
+
+            Console.WriteLine($"Team Skill Level: {totalSkill}");
+            Console.WriteLine($"Bank Difficulty Level: {bankDifficulty}");
+            Console.WriteLine();
 
             if (totalSkill >= bankDifficulty)
             {
