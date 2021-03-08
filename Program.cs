@@ -13,6 +13,8 @@ namespace Heist
             Console.WriteLine("Plan Your Heist!");
             Console.WriteLine();
 
+            int bankDifficulty = 100;
+
             while (name != "")
             {
                 // Initialize local variables
@@ -53,14 +55,21 @@ namespace Heist
             }
             Console.WriteLine();
             Console.WriteLine($"There are {team.Members.Count} members on the team");
+
+            int totalSkill = 0;
+
             foreach (Member member in team.Members)
             {
-                Console.WriteLine("--------------------------------------");
-                Console.WriteLine($"Member Name: {member.Name}");
-                Console.WriteLine($"Member Skill: {member.Skill}");
-                Console.WriteLine($"Member Courage: {member.Courage}");
-                Console.WriteLine("--------------------------------------");
-                Console.WriteLine();
+                totalSkill += member.Skill;
+            }
+
+            if (totalSkill >= bankDifficulty)
+            {
+                Console.WriteLine("The heist was successful!");
+            }
+            else
+            {
+                Console.WriteLine("The heist failed.");
             }
         }
     }
