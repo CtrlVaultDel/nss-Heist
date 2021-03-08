@@ -66,23 +66,46 @@ namespace Heist
             {
                 totalSkill += member.Skill;
             }
-            // Prepare random number for "luck"
-            Random rnd = new Random();
-            int luck = rnd.Next(-10, 11);
 
-            bankDifficulty += luck;
+            // Initialize Attempts
+            int maxAttempts = 0;
+            int attempts = 0;
 
-            Console.WriteLine($"Team Skill Level: {totalSkill}");
-            Console.WriteLine($"Bank Difficulty Level: {bankDifficulty}");
+            bool passedAttempts = false;
+
+            // Prompt the user to enter how many attempts they want.
+            while (!passedAttempts)
+            {
+                Console.Write("How many banks do you want your team to hit (#)? ");
+                passedAttempts = int.TryParse(Console.ReadLine(), out maxAttempts);
+            }
+
             Console.WriteLine();
 
-            if (totalSkill >= bankDifficulty)
+            // Runs the heist attempts based off the user's response
+            while (attempts < maxAttempts)
             {
-                Console.WriteLine("The heist was successful!");
-            }
-            else
-            {
-                Console.WriteLine("The heist failed.");
+                // Prepare random number for "luck"
+                Random rnd = new Random();
+                int luck = rnd.Next(-10, 11);
+
+                // Add luck's value to bank difficulty
+                int totalDifficulty = luck + bankDifficulty;
+
+                // Let the user know what their total skill is in relation to the total difficulty
+                Console.WriteLine($"Team Skill Level: {totalSkill}");
+                Console.WriteLine($"Bank Difficulty Level: {totalDifficulty}");
+
+                if (totalSkill >= totalDifficulty)
+                {
+                    Console.WriteLine("The heist was successful!");
+                }
+                else
+                {
+                    Console.WriteLine("The heist failed.");
+                }
+                Console.WriteLine();
+                attempts++;
             }
         }
     }
